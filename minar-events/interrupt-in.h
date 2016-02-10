@@ -18,7 +18,7 @@ public:
   template<typename T>
   void rise(T *tptr, void(T::*mptr)(void)){
     this->_fptr.attach(tptr, mptr);
-    _interrupt.rise(tptr, mptr);
+    _interrupt.rise(this, &InterruptIn::callback);
   }
 
   void fall(void(*fptr)(void)) {
@@ -29,7 +29,7 @@ public:
   template<typename T>
   void fall(T *tptr, void(T::*mptr)(void)){
     this->_fptr.attach(tptr, mptr);
-    _interrupt.fall(tptr, mptr);
+    _interrupt.fall(this, &InterruptIn::callback);
   }
 
 private:
